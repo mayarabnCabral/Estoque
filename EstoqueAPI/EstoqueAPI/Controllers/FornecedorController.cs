@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EstoqueAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class FornecedorController : ControllerBase
     {
         [HttpGet]
