@@ -7,13 +7,13 @@
         Saida = 2
     }
     // Fim da "configurãção" do Enum
-    public class MovimentacoesModel
+    public class MovimentacaoModel
     {
-        public int MovimentacoesID { get; set; }
+        public int MovimentacaoId { get; set; }
 
         // Inicio FK de produtos
         public int ProdutoId { get; set; }
-        public ProdutosModel Produto { get; set; }
+        public ProdutoModel Produto { get; set; }
         // Fim FK de produtos
         public TipoDeMovimentacao Tipo { get; set; }
         public int Quantidade { get; set; }

@@ -8,7 +8,7 @@ namespace EstoqueAPI.Controllers
     public class FornecedorController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<List<ProdutosModel>> BuscarTodosOsProdutos()
+        public ActionResult<List<ProdutoModel>> BuscarTodosOsFornecedores()
         {
             return Ok();
         }

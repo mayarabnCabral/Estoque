@@ -14,16 +14,16 @@ namespace EstoqueAPI.Data
 
         }
 
-        public DbSet<ProdutosModel>  Produtos { get; set; } // Representa a tabela de Produtos no banco de dados
+        public DbSet<ProdutoModel>  Produtos { get; set; } // Representa a tabela de Produtos no banco de dados
         public DbSet<FornecedorModel> Fornecedores { get; set; } // Representa a tabela de Fornecedores no banco de dados
-        public DbSet <MovimentacoesModel> Movimentacoes { get; set; } // Representa a tabela de Movimentacoes no banco de dados
+        public DbSet <MovimentacaoModel> Movimentacoes { get; set; } // Representa a tabela de Movimentacoes no banco de dados
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) // Configurações os relacionamentos da entidade
         {
             modelBuilder.Entity<FornecedorModel>() // Informa que vou configurar a entidade FornecedorModel (Tudo que vier a seguir será sobre como os FornecedorModel se relacionam com outras entidades)
                 .HasMany(f => f.Produtos) //Informa que o OFrnecedor pode ter muitos produtos
                 .WithOne(p => p.Fornecedor) // Informa que cada produto está relacionado a um unico fornecedor
-                .HasForeignKey(p => p.IdFornecedor); // Informamos qual prorpiewdade em ProdutosModelé a FK (Chave estrangeira)
+                .HasForeignKey(p => p.FornecedorId); // Informamos qual prorpiewdade em ProdutosModelé a FK (Chave estrangeira)
         }
     }
 }
