@@ -18,10 +18,10 @@ namespace EstoqueAPI
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            builder.Services.AddEntityFrameworkSqlServer().
-                AddDbContext<EstoqueDBContext>(
-                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
-                );
+            builder.Services.AddDbContext<EstoqueDBContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            );
+
 
             builder.Services.AddScoped<IProduto, ProdutoRepositorio>();
             builder.Services.AddScoped<IFornecedor, FornecedorRepositorio>();
