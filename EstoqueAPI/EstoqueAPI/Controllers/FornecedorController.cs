@@ -1,4 +1,5 @@
-﻿using EstoqueAPI.Models;
+﻿using EstoqueAPI.Interfaces;
+using EstoqueAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstoqueAPI.Controllers
@@ -7,10 +8,29 @@ namespace EstoqueAPI.Controllers
     [ApiController]
     public class FornecedorController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<List<ProdutoModel>> BuscarTodosOsFornecedores()
+        private readonly IFornecedor _fornecedorRepositorio;
+        public FornecedorController(IFornecedor fornecedorRepositorio)
         {
-            return Ok();
+            _fornecedorRepositorio = fornecedorRepositorio;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<FornecedorModel>>> BuscarTodosOsFornecedores()
+        {
+            List<FornecedorModel> fornecedor = await _fornecedorRepositorio.BuscarTodosOsFornecedores();
+            return Ok(fornecedor);
+        }
+        [HttpGet("{ProdutoId}")]
+        public async Task<ActionResult<ProdutoModel>> BuscarPorId(int FornecedorId)
+        {
+            FornecedorModel fornecedor = await _fornecedorRepositorio.BuscarPorId(FornecedorId);
+            return Ok(fornecedor);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<FornecedorModel>> Cadastrar([FromBody] FornecedorModel fornecedorModel)
+        {
+            FornecedorModel fornecedor = await _fornecedorRepositorio.Adicionar(fornecedorModel);
+            return Ok(fornecedor);
         }
     }
 }

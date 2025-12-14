@@ -3,6 +3,8 @@ using EstoqueAPI.Data;
 using EstoqueAPI.Interfaces;
 using EstoqueAPI.Repositorios;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace EstoqueAPI
 {
@@ -19,7 +21,10 @@ namespace EstoqueAPI
             builder.Services.AddOpenApi();
 
             builder.Services.AddDbContext<EstoqueDBContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            options.UseMySql(
+            builder.Configuration.GetConnectionString("DataBase"),
+            new MySqlServerVersion(new Version(8, 0, 44))
+                )
             );
 
 

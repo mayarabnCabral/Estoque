@@ -69,14 +69,5 @@ namespace EstoqueAPI.Repositorios
 
         }
 
-        List<FornecedorModel> IFornecedor.BuscarTodosOsFornecedores()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FornecedorModel> Adiconar(FornecedorModel fornecedor)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

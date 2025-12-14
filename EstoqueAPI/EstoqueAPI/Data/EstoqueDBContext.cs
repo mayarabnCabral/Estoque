@@ -41,7 +41,7 @@ namespace EstoqueAPI.Data
             modelBuilder.Entity<FornecedorModel>() // Informa que vou configurar a entidade FornecedorModel
                 .HasMany(f => f.Produtos) // Informa que o Fornecedor pode ter muitos produtos
                 .WithOne(p => p.Fornecedor) // Cada produto está relacionado a um único fornecedor
-                .HasForeignKey(p => p.FornecedorId); // FK localizada em ProdutoModel
+                .HasForeignKey(p => p.FornecedorId);
 
             // Fim Fornecedor
 

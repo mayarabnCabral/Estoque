@@ -47,6 +47,7 @@ namespace EstoqueAPI.Repositorios
             // Atualiza os campos do produto
             produtoPorId.Descricao = produtos.Descricao; // Atualiza a descrição
             produtoPorId.Quantidade = produtos.Quantidade; // Atualiza a quantidade
+            produtoPorId.Preco = produtos.Preco; // Atualiza a quantidade
             produtoPorId.FornecedorId = produtos.FornecedorId; // Atualiza o fornecedor
 
             await _dbContext.SaveChangesAsync(); // Salva as alterações
@@ -70,14 +71,5 @@ namespace EstoqueAPI.Repositorios
             return true; // Retorna true para indicar sucesso
         }
 
-        public List<ProdutoModel> BuscarTodosOSProdutos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ProdutoModel> Adiconar(ProdutoModel produtos)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
