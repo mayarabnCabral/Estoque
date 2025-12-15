@@ -19,7 +19,7 @@ namespace EstoqueAPI.Controllers
             List<FornecedorModel> fornecedor = await _fornecedorRepositorio.BuscarTodosOsFornecedores();
             return Ok(fornecedor);
         }
-        [HttpGet("{ProdutoId}")]
+        [HttpGet("{FornecedorId}")]
         public async Task<ActionResult<ProdutoModel>> BuscarPorId(int FornecedorId)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.BuscarPorId(FornecedorId);
@@ -30,7 +30,22 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<FornecedorModel>> Cadastrar([FromBody] FornecedorModel fornecedorModel)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.Adicionar(fornecedorModel);
-            return Ok(fornecedor);
+            return Ok($"Fornecedor cadastrado com sucesso, seu identificador é ({fornecedor.FornecedorId})");
         }
+
+        [HttpPut("{FornecedorId}")]
+        public async Task<ActionResult<FornecedorModel>> Atualizar([FromBody] FornecedorModel fornecedorModel, int fornecedorId)
+        {
+            FornecedorModel fornecedor = await _fornecedorRepositorio.Atualizar(fornecedorModel, fornecedorId);
+            return Ok($"Fornecedor atualizado com sucesso");
+        }
+
+        [HttpDelete("{FornecedorId}")]
+        public async Task<ActionResult<FornecedorModel>> Apagar(int fornecedorId)
+        {
+            FornecedorModel fornecedor = await _fornecedorRepositorio.Apagar(fornecedorId);
+            return Ok($"Fornecedor excluído com sucesso");
+        }
+
     }
 }

@@ -30,7 +30,20 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<MovimentacaoModel>> Cadastrar([FromBody] MovimentacaoModel MovimentacaoId)
         {
             MovimentacaoModel movimentacao = await _movimentacaoRepositorio.Adicionar(MovimentacaoId);
-            return Ok(movimentacao);
+           if (movimentacao.Tipo == Enums.MovimentacaoEnum.Entrada)
+                return Ok(new { mensagem = $"Entrada de mercadoria efetuada com sucesso, seu identificador é ({movimentacao.MovimentacaoId})" });
+
+           return Ok(new { mensagem = $"Venda efetuada com sucesso, seu identificador é ({movimentacao.MovimentacaoId})" });
+
+        }
+
+        // Não terá configuração do PUt, pois movimentação não pode atualizar as informações 
+
+        [HttpDelete("{MovimentacaoId}")]
+        public async Task<ActionResult<MovimentacaoModel>> Apagar(int movimentacaoId)
+        {
+            MovimentacaoModel movimentacao = await _movimentacaoRepositorio.Apagar(movimentacaoId);
+            return Ok($"Movimentação de identificação ({movimentacaoId}) cancelada com sucesso");
         }
     }
 }

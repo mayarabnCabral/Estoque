@@ -55,7 +55,7 @@ namespace EstoqueAPI.Repositorios
 
         }   
 
-        public async Task<bool> Apagar(int produtoId) // Apaga um produto pelo id
+        public async Task<ProdutoModel> Apagar(int produtoId) // Apaga um produto pelo id
         {
             ProdutoModel produtoPorId = await BuscarPorId(produtoId);  // Busca o produto pelo id
 
@@ -68,7 +68,7 @@ namespace EstoqueAPI.Repositorios
 
             await _dbContext.SaveChangesAsync();
 
-            return true; // Retorna true para indicar sucesso
+            return produtoPorId; // Retorna true para indicar sucesso
         }
 
     }

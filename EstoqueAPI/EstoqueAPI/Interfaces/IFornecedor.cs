@@ -8,6 +8,6 @@ namespace EstoqueAPI.Interfaces
         Task<FornecedorModel> BuscarPorId(int FornecedorId);
         Task<FornecedorModel> Adicionar(FornecedorModel fornecedor);
         Task<FornecedorModel> Atualizar(FornecedorModel fornecedor, int FornecedorId);
-        Task<bool> Apagar(int FornecedorId);
+        Task<FornecedorModel> Apagar(int FornecedorId);
     }
 }

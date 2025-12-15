@@ -32,7 +32,23 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<ProdutoModel>> Cadastrar([FromBody] ProdutoModel produtoModel)
         {
             ProdutoModel produto = await _produtoRepositorio.Adicionar(produtoModel);
-            return Ok(produto);
+            return Ok($"Produto cadastrado com sucesso, seu identificador é ({produto.ProdutoId})");
+        }
+
+        [HttpPut("{ProdutoId}")]
+        public async Task<ActionResult<ProdutoModel>> Atualizar([FromBody] ProdutoModel produtoModel, int produtoId)
+        {
+            ProdutoModel produto = await _produtoRepositorio.Atualizar(produtoModel, produtoId);
+            return Ok($"Produto atualizado com sucesso");
+        }
+
+        [HttpDelete("{ProdutoId}")]
+        public async Task<ActionResult<ProdutoModel>> Apagar(int produtoId)
+        {
+            ProdutoModel produto = await _produtoRepositorio.Apagar(produtoId);
+            return Ok($"Produto excluído com sucesso");
+
+
         }
     }
 }

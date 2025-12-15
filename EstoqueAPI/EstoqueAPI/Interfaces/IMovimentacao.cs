@@ -7,6 +7,6 @@ namespace EstoqueAPI.Interfaces
         Task<List<MovimentacaoModel>> BuscarPorTodasAsMovimentacoes();
         Task<MovimentacaoModel> BuscarPorId(int MovimentacaoId);
         Task<MovimentacaoModel> Adicionar(MovimentacaoModel movimentacao);
-        Task<bool> Apagar(int Movimentacao);
+        Task<MovimentacaoModel> Apagar(int Movimentacao);
     }
 }

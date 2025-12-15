@@ -52,7 +52,7 @@ namespace EstoqueAPI.Repositorios
 
         }
 
-        public async Task<bool> Apagar(int fornecedorId) // Apaga um forncedore pelo id
+        public async Task<FornecedorModel> Apagar(int fornecedorId) // Apaga um forncedore pelo id
         {
             FornecedorModel fornecedorPorId = await BuscarPorId(fornecedorId);  // Busca o fornecedor pelo id
 
@@ -65,7 +65,7 @@ namespace EstoqueAPI.Repositorios
 
             await _dbContext.SaveChangesAsync();
 
-            return true; // Retorna true para indicar sucesso
+            return fornecedorPorId; // Retorna true para indicar sucesso
 
         }
 

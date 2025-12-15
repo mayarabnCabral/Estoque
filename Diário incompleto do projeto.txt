@@ -1,0 +1,18 @@
+Comecei hoje, pois foi quando tive a ideia.
+Vou implementar isso para projetos futuros, para conseguir medir e verificar meu progresso e aprendizado
+
+14/12/2025
+Não me atentei que estava utilizando o BD do SQLExpress e alterei as configurações de conexão ao banco para o MySql 
+
+Tive um erro para gerar a migration, mesmo excluindo o banco e a pasta Migrations com todos os seu arquivos não funcionava 
+rodei o Remove-Migration e mesmo assim não dava certo
+
+verifiquei que haviam pastas ocultas no VS, no gestão de soluções clique em "Mostrar todos os arquivos" (3 folhas ou retângulos na parte superior da tela), apaguei as pastas bin, obj e migrantions, fechei o VS para evitar interferência do cache, segui por Ferramentas > Gerenciador de Pacotes do NuGet > Console do Gerenciador de Pacotes > rodei o comando Add-Migration InitialDB -Context EstoqueDBContext e depois Update-Database -Context EstoqueDBContext e deu certo 
+
+15/12/2025
+Ocorreu o erro CS0029: Não é possível converter implicitamente tipo "bool" em "EstoqueAPl.Models.ProdutoModel", não me atentei que no IProduto informei o tipo bool não a classe model ocasionando no erro, ajustei e deu certo 
+
+Começou a dar erro no delete de movimentação onde mesmo a movimentação existindo dava erro informando que não conseguia localizar a movimentação, verifiquei que esqueci de alterar a rota no [HttpDelete] e deu certo 
+
+Tive um pouco de dificuldade para implementar a logica de negocio, para que ao efetuar ou cancelar a movimentação seja ajustada a quantidade no produto 
+	Utilizei If para efetuar os processo se for entrada ou saída e acessei o objeto de movimentação e produto 	para conseguir alterar  

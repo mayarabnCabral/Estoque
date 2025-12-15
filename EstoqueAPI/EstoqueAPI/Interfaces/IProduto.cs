@@ -8,6 +8,6 @@ namespace EstoqueAPI.Interfaces
         Task<ProdutoModel> BuscarPorId(int ProdutoId);
         Task<ProdutoModel> Adicionar(ProdutoModel produto);
         Task<ProdutoModel> Atualizar(ProdutoModel produto, int ProdutoId);
-        Task<bool> Apagar(int ProdutoId); 
+        Task<ProdutoModel> Apagar(int ProdutoId); 
     }
 }
