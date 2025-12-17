@@ -32,22 +32,26 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<ProdutoModel>> Cadastrar([FromBody] ProdutoModel produtoModel)
         {
             ProdutoModel produto = await _produtoRepositorio.Adicionar(produtoModel);
-            return Ok($"Produto cadastrado com sucesso, seu identificador é ({produto.ProdutoId})");
+            return CreatedAtAction(
+                        nameof(BuscarPorId),
+                        new { produtoId = produto.ProdutoId },
+                        produto
+                    ); // retonar 201 - Create
         }
 
         [HttpPut("{ProdutoId}")]
         public async Task<ActionResult<ProdutoModel>> Atualizar([FromBody] ProdutoModel produtoModel, int produtoId)
         {
             ProdutoModel produto = await _produtoRepositorio.Atualizar(produtoModel, produtoId);
-            return Ok($"Produto atualizado com sucesso");
+            return Ok($"Produto atualizado com sucesso"); // Tem que retornar 203 - Non-authoritative Information ou 204 - No Content
         }
 
         [HttpDelete("{ProdutoId}")]
         public async Task<ActionResult<ProdutoModel>> Apagar(int produtoId)
         {
             ProdutoModel produto = await _produtoRepositorio.Apagar(produtoId);
-            return Ok($"Produto excluído com sucesso");
-
+            return NoContent(); // Tem que retornar 204 - No Content
+            
 
         }
     }
