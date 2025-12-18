@@ -18,9 +18,9 @@ namespace EstoqueAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("EstoqueAPI.Models.FornecedorModel", b =>
                 {
@@ -28,17 +28,17 @@ namespace EstoqueAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("FornecedorId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FornecedorId"));
 
                     b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasMaxLength(14)
-                        .HasColumnType("varchar(14)");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("FornecedorId");
 
@@ -51,10 +51,10 @@ namespace EstoqueAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MovimentacaoId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovimentacaoId"));
 
                     b.Property<DateTime>("DataMovimentacao")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
@@ -78,18 +78,19 @@ namespace EstoqueAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ProdutoId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProdutoId"));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("FornecedorId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(65,30)");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");

@@ -23,6 +23,8 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<ProdutoModel>> BuscarPorId(int FornecedorId)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.BuscarPorId(FornecedorId);
+            if (fornecedor == null)
+                return NotFound($"Fornecedor de identificação ({FornecedorId}) não encontrado");
             return Ok(fornecedor);
         }
 
@@ -30,21 +32,27 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<FornecedorModel>> Cadastrar([FromBody] FornecedorModel fornecedorModel)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.Adicionar(fornecedorModel);
-            return Ok($"Fornecedor cadastrado com sucesso, seu identificador é ({fornecedor.FornecedorId})");
+            return CreatedAtAction(
+                nameof(BuscarPorId), // Nome da ação
+                new { FornecedorId = fornecedor.FornecedorId }, // Parâmetros da rota
+                new { mensagem = "Fornecedor cadastrado com sucesso", fornecedor } // Corpo da resposta
+                );
         }
 
         [HttpPut("{FornecedorId}")]
         public async Task<ActionResult<FornecedorModel>> Atualizar([FromBody] FornecedorModel fornecedorModel, int fornecedorId)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.Atualizar(fornecedorModel, fornecedorId);
-            return Ok($"Fornecedor atualizado com sucesso");
+            if (fornecedor == null)
+                return NotFound($"Fornecedor de identificação ({fornecedorId}) não encontrado");
+            return NoContent();
         }
 
         [HttpDelete("{FornecedorId}")]
         public async Task<ActionResult<FornecedorModel>> Apagar(int fornecedorId)
         {
             FornecedorModel fornecedor = await _fornecedorRepositorio.Apagar(fornecedorId);
-            return Ok($"Fornecedor excluído com sucesso");
+            return NoContent();
         }
 
     }

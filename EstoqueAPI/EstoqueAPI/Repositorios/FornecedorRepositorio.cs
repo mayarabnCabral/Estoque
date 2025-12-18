@@ -17,13 +17,13 @@ namespace EstoqueAPI.Repositorios
 
         public async Task<FornecedorModel> BuscarPorId(int fornecedorId)
         {
-            return await _dbContext.Fornecedores.FirstOrDefaultAsync(x => x.FornecedorId == fornecedorId);
+            return await _dbContext.Fornecedores.Include(f => f.Produtos).FirstOrDefaultAsync(x => x.FornecedorId == fornecedorId);
         }
 
 
         public async Task<List<FornecedorModel>> BuscarTodosOsFornecedores() // Retorna todos os Fornecedores
         {
-            return await _dbContext.Fornecedores.ToListAsync(); // Converte o DbSet em uma lista assíncrona
+            return await _dbContext.Fornecedores.Include(f => f.Produtos).ToListAsync(); // Converte o DbSet em uma lista assíncrona e mostra os produtos associados ao fornecedor
         }
 
         public async Task<FornecedorModel> Adicionar(FornecedorModel fornecedor)

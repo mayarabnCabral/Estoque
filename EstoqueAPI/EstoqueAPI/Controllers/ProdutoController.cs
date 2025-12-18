@@ -19,12 +19,16 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<List<ProdutoModel>>> BuscarTodosOsProdutos()
         {
             List<ProdutoModel> produtos = await _produtoRepositorio.BuscarTodosOsProdutos();
+
             return Ok(produtos);
         }
         [HttpGet("{ProdutoId}")]
         public async Task<ActionResult<ProdutoModel>> BuscarPorId(int ProdutoId)
         {
             ProdutoModel produto = await _produtoRepositorio.BuscarPorId(ProdutoId);
+            if (produto == null)
+                return NotFound("Produtos não encontrados.");
+
             return Ok(produto);
         }
 
@@ -33,9 +37,9 @@ namespace EstoqueAPI.Controllers
         {
             ProdutoModel produto = await _produtoRepositorio.Adicionar(produtoModel);
             return CreatedAtAction(
-                        nameof(BuscarPorId),
-                        new { produtoId = produto.ProdutoId },
-                        produto
+                        nameof(BuscarPorId), // Nome da ação
+                        new {produtoId = produto.ProdutoId}, // parâmetros da rota
+                        produto  // corpo da resposta
                     ); // retonar 201 - Create
         }
 
@@ -43,7 +47,9 @@ namespace EstoqueAPI.Controllers
         public async Task<ActionResult<ProdutoModel>> Atualizar([FromBody] ProdutoModel produtoModel, int produtoId)
         {
             ProdutoModel produto = await _produtoRepositorio.Atualizar(produtoModel, produtoId);
-            return Ok($"Produto atualizado com sucesso"); // Tem que retornar 203 - Non-authoritative Information ou 204 - No Content
+            if(produto == null)
+                return NotFound("Produto não encontrado");
+            return NoContent(); // Tem que retornar 203 - Non-authoritative Information ou 204 - No Content
         }
 
         [HttpDelete("{ProdutoId}")]
