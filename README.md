@@ -38,7 +38,7 @@ O coração da aplicação é composto por três entidades principais interconec
 * **Framework:** ASP.NET Core / .NET 9.0
 * **ORM:** Entity Framework Core (EF Core)
 * **Banco de Dados:** PostgreSQL
-* **Ambiente de Desenvolvimento:** Replit
+* **Ambiente de Desenvolvimento:** Visual Studio
 
 ---
 
