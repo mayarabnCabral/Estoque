@@ -1,49 +1,112 @@
-# 📦 EstoqueAPI - Sistema de Gestão de Inventário
+# 📦 EstoqueAPI — Sistema de Gestão de Inventário
 
 ![.NET 9.0](https://img.shields.io/badge/.NET-9.0-512bd4?style=for-the-badge&logo=dotnet)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Entity Framework](https://img.shields.io/badge/EF%20Core-512bd4?style=for-the-badge&logo=dotnet)
 
-Uma API robusta para controle de estoque, desenvolvida com foco em **Programação Orientada a Objetos (POO)** e persistência de dados em banco relacional.
+API RESTful desenvolvida para gestão de estoque, com foco em boas práticas de **Programação Orientada a Objetos (POO)**, organização de código e persistência em banco de dados relacional.
 
 ---
 
 ## 🚀 Sobre o Projeto
 
-O **EstoqueAPI** foi criado para gerenciar não apenas produtos, mas toda a cadeia de suprimentos, desde o cadastro de fornecedores até o histórico detalhado de movimentações (entradas e saídas).
+O **EstoqueAPI** foi criado para gerenciar de forma estruturada produtos, fornecedores e movimentações de estoque, permitindo um controle preciso de entradas e saídas.
 
-### 🛠️ Funcionalidades Principais
-
-* **Gestão de Fornecedores:** Cadastro com validação de CNPJ (armazenado como `string` para manter a integridade de zeros à esquerda).
-* **Controle de Produtos:** Gerenciamento de itens com preços em `decimal` para precisão monetária.
-* **Histórico de Movimentações:** Registro automático de data e tipo de operação (Entrada/Saída) para cada alteração de estoque.
-* **Persistência em Nuvem:** Integração com banco de dados **PostgreSQL** (via Neon DB).
+O projeto demonstra domínio em desenvolvimento de APIs com **ASP.NET Core**, mapeamento objeto-relacional com **Entity Framework Core** e integração com **PostgreSQL**.
 
 ---
 
-## 🏗️ Arquitetura de Dados (Models)
+## 🛠️ Funcionalidades
 
-O coração da aplicação é composto por três entidades principais interconectadas:
+* **Gestão de Fornecedores**
+    * Cadastro e listagem de fornecedores.
+    * Tratamento de CNPJ como string para preservação de formatação.
+* **Gestão de Produtos**
+    * Vínculo obrigatório com fornecedores.
+    * Controle dinâmico de quantidade em estoque.
+    * Uso de tipo `decimal` para precisão em valores monetários.
+* **Movimentação de Estoque**
+    * Registro de entradas e saídas.
+    * Histórico detalhado com `DateTime`.
+    * Classificação por tipo de movimentação.
 
-1. **Produto (`ProdutoModel`):** Possui `ProdutoId`, `Descricao`, `Quantidade` e `Preco`. Relaciona-se com um fornecedor.
-2. **Fornecedor (`FornecedorModel`):** Identificado por `CNPJ` e `Descricao`. Possui uma lista de produtos vinculados.
-3. **Movimentação (`MovimentacaoModel`):** Registra o `Tipo` da movimentação, a `Quantidade` alterada e o `DateTime` exato da transação.
+---
 
+## 🏗️ Modelagem de Dados
+
+A aplicação utiliza o relacionamento entre três entidades principais:
+
+### 📦 Produto (`ProdutoModel`)
+* `ProdutoId`, `Descricao`, `Quantidade`, `Preco`.
+* Relacionamento N:1 com Fornecedor.
+
+### 🏭 Fornecedor (`FornecedorModel`)
+* `FornecedorId`, `CNPJ`, `Descricao`.
+* Lista de produtos associados.
+
+### 🔄 Movimentação (`MovimentacaoModel`)
+* `MovimentacaoId`, `TipoMovimentacao`, `Quantidade`, `DataMovimentacao`.
+* Relacionamento com Produto.
 
 ---
 
 ## 💻 Tecnologias Utilizadas
 
 * **Linguagem:** C#
-* **Framework:** ASP.NET Core / .NET 9.0
-* **ORM:** Entity Framework Core (EF Core)
-* **Banco de Dados:** PostgreSQL
-* **Ambiente de Desenvolvimento:** Visual Studio
+* **Framework:** ASP.NET Core (.NET 9.0)
+* **ORM:** Entity Framework Core
+* **Banco de Dados:** PostgreSQL (Neon DB)
+* **Ferramentas de Teste:** Postman
+* **IDE:** Visual Studio
 
 ---
 
-## ⚙️ Como Executar
+## ⚙️ Como Executar o Projeto
 
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/mayarabnCabral/Estoque.git](https://github.com/mayarabnCabral/Estoque.git)
+### Pré-requisitos
+* .NET SDK 9.0
+* PostgreSQL (Local ou Cloud)
+* Visual Studio ou VS Code
+
+### Passos
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/mayarabnCabral/Estoque.git](https://github.com/mayarabnCabral/Estoque.git)
+    ```
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd Estoque
+    ```
+3.  **Configure a string de conexão** no arquivo `appsettings.json`:
+    ```json
+    "ConnectionStrings": {
+      "DefaultConnection": "Host=seu_host;Database=seu_db;Username=seu_user;Password=sua_senha"
+    }
+    ```
+4.  **Execute as migrations** para criar as tabelas:
+    ```bash
+    dotnet ef database update
+    ```
+5.  **Inicie a aplicação:**
+    ```bash
+    dotnet run
+    ```
+
+---
+
+## 🧪 Testes da API
+
+Os endpoints podem ser testados via Postman ou Insomnia. 
+
+**Exemplos de Rotas:**
+* `GET /api/produtos` - Lista todos os produtos.
+* `POST /api/fornecedores` - Cadastra um novo fornecedor.
+* `POST /api/movimentacoes` - Registra entrada ou saída de itens.
+
+> **Nota:** O projeto foca na estrutura da API e lógica de negócio, priorizando testes via cliente HTTP.
+
+---
+
+## 👩‍💻 Autora
+
+**Mayara Cabral** [GitHub](https://github.com/mayarabnCabral) | [LinkedIn](SEU_LINK_DO_LINKEDIN_AQUI)
