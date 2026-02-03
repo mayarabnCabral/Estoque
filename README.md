@@ -71,7 +71,7 @@ A aplicação utiliza o relacionamento entre três entidades principais:
 ### Passos
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/mayarabnCabral/Estoque.git](https://github.com/mayarabnCabral/Estoque.git)
+    git clone https://github.com/mayarabnCabral/Estoque.git
     ```
 2.  **Acesse a pasta do projeto:**
     ```bash
@@ -109,4 +109,4 @@ Os endpoints podem ser testados via Postman ou Insomnia.
 
 ## 👩‍💻 Autora
 
-**Mayara Cabral** [GitHub](https://github.com/mayarabnCabral) | [LinkedIn](SEU_LINK_DO_LINKEDIN_AQUI)
+**Mayara Cabral** [GitHub](https://github.com/mayarabnCabral) | [LinkedIn](https://www.linkedin.com/in/mayarabnc/)
